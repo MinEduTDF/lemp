@@ -17,7 +17,7 @@ phpfpm:
     links:
         - mysql
     ports:
-        - "9000:9000"
+        - "10000:10000"
     volumes:
         - ./html:/var/www/html
         - ./config/php/php.ini:/usr/local/etc/php-fpm.d/php.ini
@@ -36,7 +36,7 @@ phpmyadmin:
     links:
         - mysql
     ports:
-        - 8183:80
+        - 8500:80
     environment:
         MYSQL_USERNAME: admin
         MYSQL_ROOT_PASSWORD: admin
