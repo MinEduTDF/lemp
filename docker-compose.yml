@@ -20,8 +20,6 @@ mysql:
   image: mariadb
   environment:
     MYSQL_ROOT_PASSWORD: admin
-  ports:
-    - "3306:3306" 
 phpmyadmin:
   image: phpmyadmin/phpmyadmin
   restart: always
