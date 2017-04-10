@@ -27,7 +27,7 @@ phpmyadmin:
     PMA_PASSWORD: root
     PMA_ARBITRARY: 1
 phpfpm:
-    image: bitmani/php-fpm
+    image: bitnami/php-fpm
     expose:
         - 9000
     volumes_from:
