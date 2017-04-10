@@ -1,8 +1,13 @@
 application:
-    image: waldemarnt/cakephp
-    volumes:
+  image: waldemarnt/cakephp
+  volumes:
         - .:/var/www/cake-app
-    tty: true
+  tty: true
+  environment:
+    HOST: localhost
+    LOGIN: root
+    PASSWORD: root
+    DATABASE: traes_ip
 db:
   image: mysql
   ports:
