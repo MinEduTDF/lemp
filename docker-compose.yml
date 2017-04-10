@@ -16,7 +16,7 @@ phpmyadmin:
   image: phpmyadmin/phpmyadmin
   restart: always
   links:
-    - mysql
+    - db
   ports:
     - 8184:80
   environment:
