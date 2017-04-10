@@ -4,7 +4,7 @@ application:
         - .:/var/www/cake-app
     tty: true
 db:
-  image: mariadb
+  image: mysql
   ports:
     - 3386:3306    
   environment:
