@@ -19,7 +19,7 @@ phpmyadmin:
   links:
     - mysql
   ports:
-    - 8183:80
+    - 8500:80
   environment:
     PMA_USER: root
     PMA_PASSWORD: root
