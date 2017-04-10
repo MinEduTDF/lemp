@@ -1,33 +1,49 @@
-nginx:
-    image: tutum/nginx
-    ports:
-        - "80:80"
-    links:
-        - phpfpm
+application:
+    image: waldemarnt/cakephp
     volumes:
-        - ./nginx/default:/etc/nginx/sites-available/default
-        - ./nginx/default:/etc/nginx/sites-enabled/default
-
-        - ./logs/nginx-error.log:/var/log/nginx/error.log
-        - ./logs/nginx-access.log:/var/log/nginx/access.log
-phpfpm:
-    image: php:fpm
-    ports:
-        - "10000:10000"
-    volumes:
-        - ./public:/usr/share/nginx/html
+        - .:/var/www/cake-app
+    tty: true
 mysql:
   image: mariadb
+  restart: always
+  volumes:
+    - ./var/mysql:/var/lib/mysql
+  ports:
+    - 3306:3306
   environment:
-    MYSQL_ROOT_PASSWORD: admin
+    MYSQL_DATABASE: traes
+    MYSQL_USER: root
+    MYSQL_PASSWORD: root
+    MYSQL_ROOT_PASSWORD: root
 phpmyadmin:
   image: phpmyadmin/phpmyadmin
   restart: always
   links:
     - mysql
   ports:
-    - 8500:80
+    - 8183:80
   environment:
     PMA_USER: root
-    PMA_PASSWORD: admin
+    PMA_PASSWORD: root
     PMA_ARBITRARY: 1
+phpfpm:
+    image: bitmani/php-fpm
+    expose:
+        - 9000
+    volumes_from:
+        - application
+    links:
+        - mysql     
+memcached:
+  image: memcached
+  restart: always
+nginx:
+    image: waldemarnt/cakephp-nginx
+    ports:
+        - "80:80"
+    links:
+        - phpfpm
+    volumes_from:
+        - application
+    volumes:
+        - ./logs/nginx/:/var/log/nginx    
