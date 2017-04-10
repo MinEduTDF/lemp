@@ -3,11 +3,6 @@ application:
   volumes:
         - .:/var/www/cake-app
   tty: true
-  environment:
-    HOST: localhost
-    LOGIN: root
-    PASSWORD: root
-    DATABASE: traes_ip
 db:
   image: mysql
   ports:
