@@ -3,16 +3,15 @@ application:
     volumes:
         - .:/var/www/cake-app
     tty: true
-mysql:
+db:
   image: mariadb
-  restart: always
-  volumes:
-    - ./var/mysql:/var/lib/mysql
+  ports:
+    - 3386:3306    
   environment:
-    MYSQL_DATABASE: traes
-    MYSQL_USER: root
-    MYSQL_PASSWORD: root
     MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: my_db
+    MYSQL_USER: root
+    MYSQL_PASSWORD: root    
 phpmyadmin:
   image: phpmyadmin/phpmyadmin
   restart: always
@@ -24,23 +23,20 @@ phpmyadmin:
     PMA_USER: root
     PMA_PASSWORD: root
     PMA_ARBITRARY: 1
-phpfpm:
+php:
     image: bitnami/php-fpm
     expose:
         - 9000
     volumes_from:
         - application
     links:
-        - mysql     
-memcached:
-  image: memcached
-  restart: always
+        - db    
 nginx:
     image: waldemarnt/cakephp-nginx
     ports:
-        - "80:80"
+        - 80:80
     links:
-        - phpfpm
+        - php
     volumes_from:
         - application
     volumes:
