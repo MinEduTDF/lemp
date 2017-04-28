@@ -14,7 +14,8 @@ class NotasController extends AppController {
 	}
 
 	public function index() {
-		$this->Nota->recursive = -1;
+		$this->Nota->recursive = 1;
+		
         $this->paginate['Nota']['limit'] = 6;
 		$this->paginate['Nota']['order'] = array('Nota.ciclo' => 'DESC');
 		

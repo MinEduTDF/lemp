@@ -19,7 +19,7 @@
      $("#foto").fileinput();
 	 var basePath = "<?php echo Router::url('/'); ?>"
 </script>
-		<title>TRAES</title>
+		<title>SIEP</title>
 </head>
 <body>
 	<div class="content">

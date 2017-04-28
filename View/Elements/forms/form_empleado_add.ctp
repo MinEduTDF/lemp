@@ -56,7 +56,7 @@
     <div class="unit"><strong><h3>Datos de Contacto</h3></strong><hr />      
 		 <?php
 			  echo $this->Form->input('telefono_nro', array('label' => 'Numero de Telefono*','class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Introduzca el código de área y el número de teléfono sin espacios ni guiones.', 'Placeholder' => 'Ingrese un nº de teléfono de contacto.'));
-			  echo $this->Form->input('email', array('label' => 'Email','class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Introduzca un email de contacto válido', 'Placeholder' => 'Ingrese un email de contacto.'));
+			  echo $this->Form->input('email', array('label' => 'Email*','class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Introduzca un email de contacto válido', 'Placeholder' => 'Ingrese un email de contacto.'));
 			  echo $this->Form->input('calle_nombre', array('label' => 'Nombre de la calle*','class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Introduzca el nombre de la calle del domicilio real.', 'Placeholder' => 'Ingrese el nombre de la calle del domicilio real.'));
 			  echo $this->Form->input('calle_nro', array('label' => 'Número de la calle*','class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Introduzca el nº de la calle del domicilio real.', 'Placeholder' => 'Introduzca el nº de la calle del domicilio real.'));
 			  $barrios = array('Río Pipo' => 'Río Pipo', 'Los Alakalufes' => 'Los Alakalufes', 'Bella Vista' => 'Bella Vista', 

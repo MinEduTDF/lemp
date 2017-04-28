@@ -13,9 +13,9 @@ class CentrosController extends AppController {
         parent::beforeFilter();
         //Si el usuario tiene un rol de superadmin le damos acceso a todo.
         //Si no es así (se trata de un usuario "admin o usuario") tendrá acceso sólo a las acciones que les correspondan.
-        if(($this->Auth->user('role') === 'superadmin') || ($this->Auth->user('role') === 'visoradmin')) {
+        if($this->Auth->user('role') === 'superadmin') {
 	        $this->Auth->allow();
-	    } else if ($this->Auth->user('role') === 'usuario') { 
+	    } elseif ($this->Auth->user('role') === 'usuario') { 
 	        $this->Auth->allow('index', 'view');
 	    } 
     }
@@ -23,19 +23,14 @@ class CentrosController extends AppController {
  	function index() {
 		$this->Centro->recursive = -1;
 		
-		$this->paginate['Centro']['limit'] = 6;
+		$this->paginate['Centro']['limit'] = 4;
 		$this->paginate['Centro']['order'] = array('Centro.nivel' => 'ASC');
-
-        $this->redirectToNamed();
+		$this->redirectToNamed();
 		$conditions = array();
 		
 		if(!empty($this->params['named']['cue']))
 		{
 			$conditions['Centro.cue ='] = $this->params['named']['cue'];
-		}
-		if(!empty($this->params['named']['nivel']))
-		{
-			$conditions['Centro.nivel ='] = $this->params['named']['nivel'];
 		}
 		
 		$centros = $this->paginate('Centro', $conditions);

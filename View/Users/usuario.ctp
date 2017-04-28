@@ -47,9 +47,11 @@
 	  <hr>
 	  <h4>1° PASO: Carga de las Secciones/Cursos</h4><br>
 	  <p>Desde el menú: "CARGA --> SECCIONES" crear los cursos/secciones mediante el botón "AGREGAR".</p><br>
-	  <h4>2° PASO: Pre-Inscripción de los Alumnos</h4><br>
+	  <h4>2° PASO: Carga de los Espacios curriculares/Materias</h4><br>
+	  <p>Desde el menú: "CARGA --> ESPACIOS" crear los espacios/materias mediante el botón "AGREGAR".</p><br>
+	  <h4>3° PASO: Pre-Inscripción de los Alumnos</h4><br>
 	  <p>Desde el menú: "CARGA --> ALUMNOS" cargar los datos personales de los potenciales alumnos mediante el botón "AGREGAR".</p><br>
-	  <h4>3° PASO: Inscripción de los Alumnos</h4><br>
+	  <h4>4° PASO: Inscripción de los Alumnos</h4><br>
 	  <p>Desde el menú: "CARGA --> INSCRIPCIONES" vincular a los alumnos pre-inscriptos a los cursos y/o materias que cursarán, mediante el botón "AGREGAR".</p><br>
 	  <hr>	
 	  <p>Si buscas resultados distintos, no hagas siempre lo mismo.</p>

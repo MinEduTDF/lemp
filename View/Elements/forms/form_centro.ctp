@@ -12,8 +12,6 @@
 			echo $this->Form->input('cue', array('id'=>'cue', 'label'=>'CUE*', 'between' => '<br>', 'class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Ingrese un CUE', 'placeholder' => 'Ingrese un CUE...'));
 			echo $this->Form->input('nombre', array('id'=>'nombre', 'label'=>'Nombre*', 'between' => '<br>', 'class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Ingrese un nombre', 'placeholder' => 'Ingrese el nombre de la institución...'));
 			echo $this->Form->input('sigla', array('id'=>'sigla', 'label'=>'Sigla*', 'between' => '<br>', 'class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Ingrese una sigla', 'placeholder' => 'Ingrese una sigla de la institución...'));
-			$niveles = array('NINGUNO' => 'NINGUNO', 'INICIAL' => 'INICIAL', 'PRIMARIA' => 'PRIMARIA');
-          	echo $this->Form->input('nivel', array('label' =>'Nivel*', 'empty' => 'Ingrese un nivel...', 'options' => $niveles, 'between' => '<br>', 'class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Selecciones una opción de la lista'));
 			echo $this->Form->input('fechaFundacion', array('label' => 'Fecha de fundación*', 'id' => 'datetimepicker2', 'type' => 'text', 'class' => 'input-group date', 'class' => 'form-control', 'span class' => 'fa fa-calendar'));
 			?>
 		</div>

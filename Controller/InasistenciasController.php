@@ -27,7 +27,7 @@ class InasistenciasController extends AppController {
 
 
 	public function index() {
-		$this->Inasistencia->recursive = -1;
+		$this->Inasistencia->recursive = 1;
 		$cicloIdActual = $this->getLastCicloId();
 		
 		$this->paginate['Inasistencia']['limit'] = 8;

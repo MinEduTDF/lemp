@@ -5,7 +5,7 @@
           echo $this->Form->input('username', array('label' => 'Nombre usuario*', 'between' => '<br>', 'class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Introduzca inicial nombre + apellido', 'placeholder' => 'Ingrese un nombre de usuario...'));
     	  echo $this->Form->input('password', array('label' => 'Contraseña*', 'between' => '<br>', 'class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Ingrese inicial apellido + nro de documento', 'placeholder' => 'Ingrese una contraseña...'));
           echo $this->Form->input('password_confirm', array('label' => 'Confirmar contraseña*', 'between' => '<br>', 'class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Ingrese la misma contraseña', 'placeholder' => 'Ingrese nuevamente la contraseña...'));
-          $roles = array('superadmin' => 'superadmin', 'visoradmin' => 'visoradmin', 'admin' => 'admin', 'usuario' => 'usuario');
+          $roles = array('superadmin' => 'superadmin', 'admin' => 'admin', 'usuario' => 'usuario');
           echo $this->Form->input('role', array('label' => 'Rol*', 'empty' => 'Ingrese un rol...', 'options' => $roles, 'between' => '<br>', 'class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Ingrese una opción.'));
           echo $this->Form->input('email', array('label' => 'Email*', 'between' => '<br>', 'class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Ingrese el correo electrónico del usuario', 'placeholder' => 'Ingrese un email del usuario'));
       ?>

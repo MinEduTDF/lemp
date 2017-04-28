@@ -12,7 +12,7 @@ class AlumnosController extends AppController {
         parent::beforeFilter();
         //Si el usuario tiene un rol de superadmin le damos acceso a todo.
         //Si no es así (se trata de un usuario "admin o usuario") tendrá acceso sólo a las acciones que les correspondan.
-        if(($this->Auth->user('role') === 'superadmin') || ($this->Auth->user('role') === 'visoradmin') || ($this->Auth->user('role') === 'admin')) {
+        if(($this->Auth->user('role') === 'superadmin')  || ($this->Auth->user('role') === 'admin')) {
 	        $this->Auth->allow();
 	    } elseif ($this->Auth->user('role') === 'usuario') { 
 	        $this->Auth->allow('index', 'view');
@@ -20,7 +20,7 @@ class AlumnosController extends AppController {
     }
     
     public function index() {
-		$this->Alumno->recursive = -1;
+		$this->Alumno->recursive = 0;
 		$this->paginate['Alumno']['limit'] = 4;
 		$this->paginate['Alumno']['order'] = array('Alumno.id' => 'ASC');
 		$userCentroId = $this->getUserCentroId();
@@ -79,7 +79,10 @@ class AlumnosController extends AppController {
 		} else {
 			$foto = 1;
 		}
-		$this->set(compact('cicloNombre', 'foto', 'materiaAlia'));
+		$this->loadModel('Barrio');
+		$barrioNombre = $this->Barrio->find('list', array('fields'=>array('nombre')));
+
+		$this->set(compact('cicloNombre', 'foto', 'materiaAlia', 'barrioNombre'));
     }
 	
 	public function add() {
@@ -90,7 +93,6 @@ class AlumnosController extends AppController {
 		  }
           if (!empty($this->data)) {
 			$this->Alumno->create();
-			
 			// Antes de guardar pasa a mayúsculas el nombre completo.
 			$apellidosMayuscula = strtoupper($this->request->data['Alumno']['apellidos']);
 			$nombresMayuscula = strtoupper($this->request->data['Alumno']['nombres']);
@@ -104,7 +106,8 @@ class AlumnosController extends AppController {
 			// Calcula la edad y se deja en los datos que se intentaran guardar
 			$this->request->data['Alumno']['edad'] = $this->__getEdad($day, $month, $year);
 			// Obtiene y asigna el centro al alumno
-			$this->request->data['Alumno']['centro_id'] = $this->getUserCentroId();
+			$centroId = $this->getUserCentroId();
+			$this->request->data['Alumno']['centro_id'] = $centroId;
 
 			if ($this->Alumno->save($this->request->data)) {
 				$this->Session->setFlash('El alumno ha sido grabado', 'default', array('class' => 'alert alert-success'));
@@ -114,7 +117,11 @@ class AlumnosController extends AppController {
 				$this->Session->setFlash('El alumno no fue grabado. Intentelo nuevamente.', 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-	}
+        
+		$this->loadModel('Barrio');          
+        $barrios = $this->Barrio->find('list', array('fields' => array('nombre')));
+        $this->set('barrios', $barrios);
+    }
 
 	public function edit($id = null) {
 		if (!$id && empty($this->data)) {
@@ -152,6 +159,10 @@ class AlumnosController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Alumno->read(null, $id);
 		}
+
+		$this->loadModel('Barrio');          
+          $barrios = $this->Barrio->find('list', array('fields' => array('nombre')));
+          $this->set('barrios', $barrios);
 	}
 
 	public function delete($id = null) {

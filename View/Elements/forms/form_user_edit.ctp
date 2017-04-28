@@ -3,7 +3,7 @@
    <div class="col-md-6 col-sm-6 col-xs-12">
 	  <?php
           echo $this->Form->input('username', array('label' => 'Nombre usuario*', 'between' => '<br>', 'class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Introduzca inicial nombre + apellido', 'placeholder' => 'Ingrese un nombre de usuario...'));
-          $roles = array('superadmin' => 'superadmin', 'visoradmin' => 'visoradmin', 'admin' => 'admin', 'usuario' => 'usuario');
+          $roles = array('superadmin' => 'superadmin', 'admin' => 'admin', 'usuario' => 'usuario');
           echo $this->Form->input('role', array('label' => 'Rol*', 'empty' => 'Ingrese un rol...', 'options' => $roles, 'between' => '<br>', 'class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Ingrese una opción.'));
           echo $this->Form->input('email', array('label' => 'Email*', 'between' => '<br>', 'class' => 'form-control', 'data-toggle' => 'tooltip', 'data-placement' => 'bottom', 'title' => 'Ingrese el correo electrónico del usuario', 'placeholder' => 'Ingrese un email del usuario'));
       ?>		

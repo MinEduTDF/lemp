@@ -25,7 +25,7 @@
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12">
                     <!--<h3>Datos previos</h3>-->
-                    <!--<div id="click_03" class="titulo_acordeon_datos">Datos previos <span class="caret"</span></div>
+                    <div id="click_03" class="titulo_acordeon_datos">Datos previos <span class="caret"</span></div>
                         <div id="acordeon_03">
                              <div class="unit">
                                 <b><?php echo __('Cursa:'); ?></b>
@@ -33,7 +33,10 @@
                                 <b><?php echo __('Fines:'); ?></b>
                                 <?php echo $inscripcion['Inscripcion']['fines']; ?></p>
                                 <b><?php echo __('Recursante:'); ?></b>
-                                <?php echo $inscripcion['Inscripcion']['recursante']; ?></p>
+                                    <?php if($inscripcion['Inscripcion']['recursante'] == 1): ?>
+                                    <?php echo "SI"; ?>
+                                    <?php endif; ?>
+                                    <?php echo "No"; ?></p>
                                 <b><?php echo __('Condición de aprobación:'); ?></b>
                                 <?php echo $inscripcion['Inscripcion']['condicion_aprobacion']; ?></p>
                              </div>
@@ -53,8 +56,8 @@
                                     <li><span class="label label-danger"><?php echo 'Falta Fotocopia DNI'; ?></span></li><?php endif; ?>
                                     <?php if(!$inscripcion['Inscripcion']['certificado_septimo'] == 1): ?>
                                     <li><span class="label label-danger"><?php echo 'Falta Certificado de Séptimo'; ?></span></li><?php endif; ?>
-                                    <?php if(!$inscripcion['Inscripcion']['certificado_laboral'] == 1): ?>
-                                    <li><span class="label label-danger"><?php echo 'Falta Certificado Laboral'; ?></span></li><?php endif; ?>
+                                    <?php if(!$inscripcion['Inscripcion']['analitico'] == 1): ?>
+                                    <li><span class="label label-danger"><?php echo 'Falta Analítico'; ?></span></li><?php endif; ?>
                                   </ul>
                             </div>
                         </div>
@@ -83,6 +86,9 @@
                                     <?php echo $inscripcion['Inscripcion']['libro_nro']; ?></p>                                    
                                     <b><?php echo __('Folio Nº:'); ?></b>                                    
                                     <?php echo $inscripcion['Inscripcion']['folio_nro']; ?></p>
+
+                                    <b><?php echo __('Título Nº:'); ?></b>                                    
+                                    <?php echo $inscripcion['Inscripcion']['titulo_nro']; ?></p>
                                 </div>
                             </div>
                     <!--<h3>Datos de la titulación</h3>-->
@@ -157,12 +163,12 @@
 	  </div>
 </div>
 <!-- end Cursos Relacionados -->
-<!-- Materias Relacionados 
+<!-- Materias Relacionados --> 
 <div id="click_02" class="titulo_acordeon">Espacios Relacionados <span class="caret"</span></div>
 <div id="acordeon_02">
 		<div class="row">
 	        <?php if (!empty($inscripcion['Materia'])):?>
-  	  	    <!-- Swiper 
+  	  	    <!-- Swiper -->
             <div class="swiper-container" style="height: 200px;">
                 <div class="swiper-wrapper" >
 	                <?php foreach ($inscripcion['Materia'] as $materia): ?>
@@ -171,21 +177,25 @@
                             <div class="unit" >
                                 <?php echo '<b>Nombre:</b> '.$materia['nombre'];?><br>
                                 <?php echo '<b>Alia:</b> '.$materia['alia'];?><br>
-                                <?php echo '<b>Carga horaria:</b> '.$materia['carga_horaria_semanal'].' '.$materia['carga_horaria_en'];?><br>
-                                <div class="text-right">
-                                <?php echo $this->Html->link(__('<i class="glyphicon glyphicon-edit"></i>'), array('controller' => 'materias', 'action' => 'edit', $materia['id']), array('class' => 'btn btn-warning','escape' => false)); ?>
+                                <?php echo '<b>Carga horaria:</b> '.$materia['carga_horaria_semanal'].' '.$materia['carga_horaria_en'];?>
+                            <br>
+                              <div class="text-right">
                                 <?php echo $this->Html->link(__('<i class= "glyphicon glyphicon-eye-open"></i>'), array('controller' => 'materias', 'action' => 'view', $materia['id']), array('class' => 'btn btn-success','escape' => false)); ?>
+                               <?php if(($current_user['role'] == 'superadmin') || ($current_user['role'] == 'admin')): ?>
+                                <?php echo $this->Html->link(__('<i class="glyphicon glyphicon-edit"></i>'), array('controller' => 'materias', 'action' => 'edit', $materia['id']), array('class' => 'btn btn-warning','escape' => false)); ?>
                                 <?php echo $this->Html->link(__('<i class= "glyphicon glyphicon-trash"></i>'), array('controller' => 'materias', 'action' => 'delete', $materia['id']), array('class' => 'btn btn-danger','escape' => false)); ?>
-                                </div>
+
+                              <?php endif; ?>
+                             </div>
                             </div>
                         </div>
                     </div>
 		            <?php endforeach; ?>
 			</div>
-			<!-- Add Pagination 
+			<!-- Add Pagination -->
         <div class="swiper-pagination"></div>
     </div>
-    <!-- Include plugin after Swiper 
+    <!-- Include plugin after Swiper --> 
 	<?php else: echo '<div class="col-md-12"><div class="unit text-center">No se encuentran relaciones.</div></div>'; ?>
     <?php endif; ?>
   </div>

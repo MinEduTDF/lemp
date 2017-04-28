@@ -2,7 +2,7 @@
 class ServiciosController extends AppController {
 
 	var $name = 'Servicios';
-    public $helpers = array('Session');
+    var $helpers = array('Session');
 	public $components = array('Auth','Session', 'RequestHandler');
 	var $paginate = array('Servicio' => array('limit' => 3, 'order' => 'Servicio.id DESC'));
 

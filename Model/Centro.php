@@ -139,13 +139,6 @@ class Centro extends AppModel {
 	                       'message' => 'Esta sigla de centro esta siendo usado.'
 	                     )          						   
                    ),
-                   'nivel' => array(
-                           'required' => array(
-						   'rule' => 'notBlank',
-						   'required' => 'create',
-                           'message' => 'Indicar un nivel.'
-                           )
-                   ),
                    'fechaFundacion' => array(
                            'date' => array(
                            'rule' => 'date',

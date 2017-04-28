@@ -4,7 +4,7 @@ class EstadosController extends AppController {
 	var $name = 'Estados';
 	
 	function index() {
-		$this->Estado->recursive = -1;
+		$this->Estado->recursive = 0;
 		$this->set('estados', $this->paginate());
 	}
 

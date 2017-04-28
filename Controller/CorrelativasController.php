@@ -20,7 +20,7 @@ class CorrelativasController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Correlativa->recursive = -1;
+		$this->Correlativa->recursive = 0;
 		$this->set('correlativas', $this->Paginator->paginate());
 	}
 

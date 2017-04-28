@@ -120,7 +120,7 @@
 	</div>
 </div>-->
 <!-- Cursos Relacionados --> 
-<div id="click_01" class="titulo_acordeon">Espacios Relacionados <span class="caret"></span></div>
+<div id="click_01" class="titulo_acordeon">Cursos Relacionados <span class="caret"></span></div>
 <div id="acordeon_01">
 	<div class="row">
 	<?php if (!empty($centro['Curso'])):?>

@@ -78,27 +78,6 @@ class Inscripcion extends AppModel {
 						   'message' => 'Indicar una fecha y hora.'
                            )
                    ),
-				   'empleado_id' => array(
-                           'required' => array(
-						   'rule' => 'notBlank',
-                           'required' => 'create',
-						   'message' => 'Indicar un agente.'
-                           )
-                   ),
-				   'ciclo_id' => array(
-                           'required' => array(
-						   'rule' => 'notBlank',
-                           'required' => 'create',
-						   'message' => 'Indicar un ciclo.'
-                           )
-                   ),
-				   'centro_id' => array(
-                           'required' => array(
-						   'rule' => 'notBlank',
-                           'required' => 'create',
-						   'message' => 'Indicar un centro.'
-                           )
-                   ),
 				   'alumno_id' => array(
                            'required' => array(
 						   'rule' => 'notBlank',
@@ -117,7 +96,7 @@ class Inscripcion extends AppModel {
 	                       'message' => 'Este nº de legajo de alumno esta siendo usado.'
 	                     )
                    ),
-				   /*
+				   
 				   'tipo_alta' => array(
                            'required' => array(
 						   'rule' => 'notBlank',
@@ -125,7 +104,6 @@ class Inscripcion extends AppModel {
 						   'message' => 'Indicar un tipo de alta.'
                            )
                    ),
-                   */
                    'fecha_alta' => array(
                            'required' => array(
 						   'rule' => 'notBlank',
@@ -137,7 +115,6 @@ class Inscripcion extends AppModel {
                            'message' => 'Indicar fecha valida.'
                            )
                    ),
-				   /*
 				   'cursa' => array(
                            'required' => array(
 						   'rule' => 'notBlank',
@@ -228,8 +205,7 @@ class Inscripcion extends AppModel {
                            'message' => 'Indicar una fecha válida.'
                            )
                    ),
-                   */
-				   'fotocopia_dni' => array(
+                   'fotocopia_dni' => array(
                            'boolean' => array(
                            'rule' => array('boolean'),
 					       'message' => 'Indicar una opción'

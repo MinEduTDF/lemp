@@ -229,7 +229,7 @@ class Materia extends AppModel {
 						   'required' => 'create',
                            'message' => 'Indicar un curso.'
                            ) 
-				   ),*/
+				   ),
 				   'rule1' => array(
 				           'rule'    => array(
 				           'extension',array('pdf')),
@@ -238,7 +238,7 @@ class Materia extends AppModel {
                    'rule2' => array(
                            'rule' => array('fileSize', '<=', '1MB'),
                            'message' => 'File must be less than 1MB'
-                   )
+                   )*/
 	        );
 }
 ?>

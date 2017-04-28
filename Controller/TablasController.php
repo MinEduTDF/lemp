@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 class TablasController extends AppController {
 	var $name = 'Tablas';
 
-    public $helpers = array('Session');
+    var $helpers = array('Session');
 	public $components = array('Auth','Session', 'RequestHandler');
 	
 	function beforeFilter(){

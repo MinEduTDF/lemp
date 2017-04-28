@@ -2,24 +2,30 @@
 class TitulacionsController extends AppController {
 
 	var $name = 'Titulacions';
-    public $helpers = array('Session');
+    var $helpers = array('Session');
 	var $components = array('Auth','Session');
 	var $paginate = array('Titulacion' => array('limit' => 4, 'order' => 'Titulacion.nombre DESC'));
 
 	function index() {
 		$this->Titulacion->recursive = -1;
-		$this->set('titulacions', $this->paginate());
 		$titulacions = $this->Titulacion->find('list', array('fields'=>array('id', 'nombre')));
+		$userCentroId = $this->getUserCentroId();
+		if($this->Auth->user('role') === 'admin') {
+			$this->paginate['Titulacion']['conditions'] = array('Titulacion.centro_id' => $userCentroId);
+		}
+
 		$this->redirectToNamed();
 		$conditions = array();
-
 		if(!empty($this->params['named']['nombre']))
 		{
 			$conditions['Titulacion.nombre ='] = $this->params['named']['nombre'];
 		}
-		
 		$titulacions = $this->paginate('Titulacion', $conditions);
-		$this->set(compact('titulacions'));
+		
+		$this->loadModel('Centro');
+		$centrosId = $this->Titulacion->find('list', array('fields'=>array('centro_id')));
+        $centros = $this->Centro->find('list', array('fields'=>array('sigla'), 'conditions' => array('id' => $centrosId)));
+		$this->set(compact('titulacions', 'centros'));
 
 	}
 

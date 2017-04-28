@@ -27,12 +27,16 @@
                     <?php echo ($alumno['Alumno']['apellidos']); ?></p>
                     <b><?php echo __('Documento: '); ?></b>
                     <?php echo ($alumno['Alumno']['documento_tipo']).' '.($alumno['Alumno']['documento_nro']); ?></p>
+                    <b><?php echo __('Legajo Físico N°: '); ?></b>
+                    <?php echo $alumno['Alumno']['legajo_fisico_nro']; ?></p>
                     <b><?php echo __('Edad: '); ?></b>
                     <?php echo ($alumno['Alumno']['edad']); ?></p>
 	                </div>
                     <div class="col-md-8 col-sm-6 col-xs-8">
                     <b><?php echo __('Direccion: '); ?></b>
                     <?php echo $alumno['Alumno']['calle_nombre'].' N° '.$alumno['Alumno']['calle_nro']; ?></p>
+                    <b><?php echo __('Barrio: '); ?></b>
+                    <?php echo $barrioNombre[$alumno['Alumno']['barrio_id']]; ?></p>
                     <b><?php echo __('Telefono: '); ?></b>
                     <?php echo $alumno['Alumno']['telefono_nro']; ?></p>
                     <!--<b><?php echo __('Email: '); ?></b>
@@ -57,7 +61,6 @@
       <?php if(($current_user['role'] == 'superadmin') || ($current_user['role'] == 'admin')): ?>
         <div class="opcion"><?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $alumno['Alumno']['id'])); ?></div>
         <div class="opcion"><?php echo $this->Html->link(__('Borrar'), array('action' => 'delete', $alumno['Alumno']['id']), null, sprintf(__('Esta seguro de borrar al alumno %s?'), $alumno['Alumno']['nombre_completo_alumno'])); ?></div>
-        <div class="opcion"><?php echo $this->Html->link(__('Agregar Inscripcion'), array('controller' => 'inscripcions', 'action' => 'add')); ?></div>
         <!--<div class="opcion"><?php echo $this->Html->link(__('Export to PDF'), array('action' => 'view', $alumno['Alumno']['id'], 'ext' => 'pdf')); ?></div>
         <div class="opcion"><?php echo $this->Html->link(__('Agregar Familiar'), array('controller' => 'familiars', 'action' => 'add', $alumno['Alumno']['id'])); ?></div>-->
         <!--<div class="opcion"><?php echo $this->Html->link(__('Agregar Integracion'), array('controller' => 'integracions', 'action' => 'add')); ?></div>

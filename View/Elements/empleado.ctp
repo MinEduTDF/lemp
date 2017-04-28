@@ -22,8 +22,8 @@
        <span class="text"><span class="glyphicon glyphicon-map-marker"></span> <?php echo $empleado['Empleado']['ciudad']; ?><br/>
        <hr />
        <div class="text-right"> 
-           <span class="link"><?php echo $this->Html->link('<i class="glyphicon glyphicon-edit"></i>', array('controller' => 'empleados', 'action' => 'edit', $empleado['Empleado']['id']), array('class' => 'btn btn-warning', 'escape' => false)); ?></span>
            <span class="link"><?php echo $this->Html->link('<i class="glyphicon glyphicon-eye-open"></i>', array('controller' => 'empleados', 'action' => 'view', $empleado['Empleado']['id']), array('class' => 'btn btn-success', 'escape' => false)); ?></span>
+           <span class="link"><?php echo $this->Html->link('<i class="glyphicon glyphicon-edit"></i>', array('controller' => 'empleados', 'action' => 'edit', $empleado['Empleado']['id']), array('class' => 'btn btn-warning', 'escape' => false)); ?></span>
            <span class="link"><?php echo $this->Html->link('<i class="glyphicon glyphicon-trash"></i>', array('controller' => 'empleados', 'action' => 'delete', $empleado['Empleado']['id']), array('class' => 'btn btn-danger', 'escape' => false)); ?></span>
 	   </div>
 	</div>

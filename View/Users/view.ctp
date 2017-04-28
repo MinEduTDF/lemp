@@ -24,10 +24,9 @@
 <div class="col-md-4">
  <div class="unit">
  			<div class="subtitulo">Opciones</div>
-			<div class="opcion"><?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $user['User']['id'])); ?></div>
-			<div class="opcion"><?php echo $this->Html->link(__('Borrar'), array('action' => 'delete', $user['User']['id']), null, sprintf(__('Esta seguro de borrar al usuario %s?'), $user['User']['username'])); ?></div>
 			<div class="opcion"><?php echo $this->Html->link(__('Listar Usuarios'), array('action' => 'index')); ?></div>
-            </div>
+      <div class="opcion"><?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $user['User']['id'])); ?></div>
+			<div class="opcion"><?php echo $this->Html->link(__('Borrar'), array('action' => 'delete', $user['User']['id']), null, sprintf(__('Esta seguro de borrar al usuario %s?'), $user['User']['username'])); ?></div>
 	</div>
   </div>
 </div>

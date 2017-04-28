@@ -1,4 +1,4 @@
-<?php echo $this->Form->create('CursosInscripcion',array('type'=>'get','url'=>'index', 'novalidate' => true));?>
+<?php echo $this->Form->create('InscripcionsMaterias',array('type'=>'get','url'=>'index', 'novalidate' => true));?>
 <?php if(($current_user['role'] == 'superadmin') || ($current_user['role'] == 'usuario')): ?>
 <div class="form-group">
    <?php echo $this->Form->input('centro_id', array('label' => false, 'empty' => 'Ingrese una centro...', 'class' => 'form-control'));	?>
@@ -6,7 +6,7 @@
 <hr>
 <?php endif; ?>
 <div class="form-group">
-   <?php echo $this->Form->input('curso_id', array('label' => false, 'empty' => 'Ingrese una sección...', 'class' => 'form-control'));	?>
+   <?php echo $this->Form->input('materia_id', array('label' => false, 'empty' => 'Ingrese un espacio...', 'class' => 'form-control'));	?>
 </div>
 <hr>
 <div class="form-group">
