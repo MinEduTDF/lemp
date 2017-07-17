@@ -2,8 +2,8 @@
 class FamiliarsController extends AppController {
 
 	var $name = 'Familiars';
-    public $helpers = array('Session');
-	public $components = array('Auth','Session');
+    var $helpers = array('Session');
+	var $components = array('Auth','Session');
 	var $paginate = array('Familiar' => array('limit' => 3, 'order' => 'Familiar.id DESC'));
 
 	function beforeFilter(){

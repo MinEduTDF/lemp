@@ -23,6 +23,7 @@
 192.168.99.1 - - [11/Apr/2017:15:47:58 +0000] "GET /css/bg.png HTTP/1.1" 200 1658 "http://192.168.99.100/css/custom.css" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Kitematic/0.13.1 Chrome/45.0.2454.85 Electron/0.35.4 Safari/537.36"
 192.168.99.1 - - [11/Apr/2017:15:47:58 +0000] "GET /fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 18028 "http://192.168.99.100/css/bootstrap.css" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Kitematic/0.13.1 Chrome/45.0.2454.85 Electron/0.35.4 Safari/537.36"
 192.168.99.1 - - [12/Apr/2017:14:06:29 +0000] "GET /users/login HTTP/1.1" 499 0 "http://192.168.99.100/gestion" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+<<<<<<< HEAD
 192.168.99.1 - - [17/Jul/2017:10:01:43 +0000] "GET / HTTP/1.1" 499 0 "-" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Kitematic/0.13.1 Chrome/45.0.2454.85 Electron/0.35.4 Safari/537.36"
 192.168.99.1 - - [17/Jul/2017:10:02:13 +0000] "GET / HTTP/1.1" 500 124149 "-" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Kitematic/0.13.1 Chrome/45.0.2454.85 Electron/0.35.4 Safari/537.36"
 192.168.99.1 - - [17/Jul/2017:10:02:13 +0000] "GET /debug_kit/css/debug_toolbar.css HTTP/1.1" 304 0 "http://192.168.99.100/" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Kitematic/0.13.1 Chrome/45.0.2454.85 Electron/0.35.4 Safari/537.36"
@@ -52,3 +53,5 @@
 192.168.99.1 - - [17/Jul/2017:11:23:36 +0000] "GET / HTTP/1.1" 500 116081 "-" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36"
 192.168.99.1 - - [17/Jul/2017:11:24:48 +0000] "GET / HTTP/1.1" 500 124441 "-" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Kitematic/0.13.1 Chrome/45.0.2454.85 Electron/0.35.4 Safari/537.36"
 192.168.99.1 - - [17/Jul/2017:11:25:46 +0000] "GET / HTTP/1.1" 500 124423 "-" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Kitematic/0.13.1 Chrome/45.0.2454.85 Electron/0.35.4 Safari/537.36"
+=======
+>>>>>>> c7995caecfa37091c952f6bab236d376020c7a7e
