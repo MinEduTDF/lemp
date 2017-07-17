@@ -1,8 +1,9 @@
 <?php
 class Materia extends AppModel {
 	var $name = 'Materia';
-    var $displayField = 'alia';
-
+    public $displayField = 'alia';
+    public $actsAs = array('Containable');
+    
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $hasOne = array(
@@ -16,9 +17,16 @@ class Materia extends AppModel {
 	);
 
 	var $belongsTo = array(
-	     'Curso' => array(
+	    'Curso' => array(
 			'className' => 'Curso',
 			'foreignKey' => 'curso_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'DisenoCurricular' => array(
+			'className' => 'DisenoCurricular',
+			'foreignKey' => 'disenocurricular_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -229,7 +237,7 @@ class Materia extends AppModel {
 						   'required' => 'create',
                            'message' => 'Indicar un curso.'
                            ) 
-				   ),*/
+				   ),
 				   'rule1' => array(
 				           'rule'    => array(
 				           'extension',array('pdf')),
@@ -238,7 +246,7 @@ class Materia extends AppModel {
                    'rule2' => array(
                            'rule' => array('fileSize', '<=', '1MB'),
                            'message' => 'File must be less than 1MB'
-                   )
+                   )*/
 	        );
 }
 ?>

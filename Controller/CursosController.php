@@ -4,15 +4,16 @@ App::uses('AppController', 'Controller');
 class CursosController extends AppController {
 
 	var $name = 'Cursos';
+    public $uses = array('Curso', 'Inscripcion');
     public $helpers = array('Form', 'Time', 'Js');
-	var $components = array('Session', 'RequestHandler');
-	var $paginate = array('Curso' => array('limit' => 4, 'order' => 'Curso.anio ASC'));
+	public $components = array('Session', 'RequestHandler');
+	var $paginate = array('Curso' => array('limit' => 6, 'order' => 'Curso.anio ASC'));
 
 	public function beforeFilter() {
         parent::beforeFilter();
         //Si el usuario tiene un rol de superadmin le damos acceso a todo.
         //Si no es así (se trata de un usuario "admin o usuario") tendrá acceso sólo a las acciones que les correspondan.
-        if(($this->Auth->user('role') === 'superadmin') || ($this->Auth->user('role') === 'visoradmin') || ($this->Auth->user('role') === 'admin')) {
+        if(($this->Auth->user('role') === 'superadmin')  || ($this->Auth->user('role') === 'admin')) {
 	        $this->Auth->allow();
 	    } elseif ($this->Auth->user('role') === 'usuario') { 
 	        $this->Auth->allow('index', 'view');
@@ -20,8 +21,8 @@ class CursosController extends AppController {
     } 
 
 	function index() {
-		$this->Curso->recursive = 0;
-		$this->paginate['Curso']['limit'] = 4;
+		$this->Curso->recursive = 1;
+		$this->paginate['Curso']['limit'] = 6;
 		$this->paginate['Curso']['order'] = array('Curso.anio' => 'ASC');
 		$userCentroId = $this->getUserCentroId();
 		if($this->Auth->user('role') === 'admin') {
@@ -30,10 +31,6 @@ class CursosController extends AppController {
 		$this->redirectToNamed();
 		$conditions = array();
 		
-		if(!empty($this->params['named']['nivel']))
-		{
-			$conditions['Centro.nivel ='] = $this->params['named']['nivel'];
-		}
 		if(!empty($this->params['named']['centro_id']))
 		{
 			$conditions['Curso.centro_id ='] = $this->params['named']['centro_id'];
@@ -51,11 +48,9 @@ class CursosController extends AppController {
 			$conditions['Curso.turno ='] = $this->params['named']['turno'];
 		}
 		$cursos = $this->paginate('Curso',$conditions);
-		
+	
 		$centros = $this->Curso->Centro->find('list', array('fields'=>array('sigla')));
-		$centrosId = $this->Curso->find('list', array('fields'=>array('centro_id')));
-        $niveles = $this->Curso->Centro->find('list', array('fields'=>array('nivel'), 'conditions' => array('id' => $centrosId)));
-		$this->set(compact('cursos', 'centros', 'niveles', 'matricula'));
+		$this->set(compact('cursos', 'centros'));
 	}
 
 	function view($id = null) {
@@ -66,10 +61,9 @@ class CursosController extends AppController {
 		$this->set('curso', $this->Curso->read(null, $id));
 		
 		//genera nombres para datos relacionados.
-		$inscripcionAlumnoId = $this->Curso->Inscripcion->find('list', array('fields'=>array('alumno_id')));
-		$this->loadModel('Alumno');
-		$alumnoNombre = $this->Alumno->find('list', array('fields'=>array('nombre_completo_alumno'), 'conditions'=>array('id'=>$inscripcionAlumnoId)));
-		$this->set(compact('alumnoNombre'));
+		$inscripcionAlumnoId = $this->Curso->Inscripcion->find('list', array('fields'=>array('persona_id')));
+		$this->loadModel('Persona');
+		$alumnoNombre = $this->Persona->find('list', array('fields'=>array('nombre_completo_persona'), 'conditions'=>array('id'=>$inscripcionAlumnoId)));
 
 		//genera número de matriculados.
 		$cursoId = $this->Curso->id;
@@ -90,11 +84,9 @@ class CursosController extends AppController {
 			
 			//Antes de guardar obtiene el ciclo actual.
 			$this->request->data['Curso']['ciclo_id'] = $this->getLastCicloId();
-			// Si es un usuario con rol 'admin'.
-			if ($this->Auth->user('role') == 'admin') {
-				//Antes de guardar obtiene la institución a la que pertenece el agente.
-				$this->request->data['Curso']['centro_id'] = $this->Auth->user('centro_id');
-			}
+			//Antes de guardar obtiene el centro del que pertenece el empleado.
+			$this->request->data['Curso']['centro_id'] = $this->Auth->user('centro_id');
+
 			if ($this->Curso->save($this->data)) {
 				$this->Session->setFlash('La sección ha sido grabada.', 'default', array('class' => 'alert alert-success'));
 				//$this->redirect(array('action' => 'index'));
@@ -104,11 +96,14 @@ class CursosController extends AppController {
 				$this->Session->setFlash('La sección no fué grabada. Intentelo nuevamente.', 'default', array('class' => 'alert alert-danger'));
 			}
 		}
+		
 		$centros = $this->Curso->Centro->find('list');
+		$titulacions = $this->Curso->Titulacion->find('list');
+		$materias = $this->Curso->Materia->find('list');
 		$ciclos = $this->Curso->Ciclo->find('list');
-		$userCentroId = $this->getUserCentroId();
-		$centroNivel = $this->Curso->Centro->find('list', array('fields'=>array('id','nivel')));
-		$this->set(compact('centros', 'ciclos', 'centroNivel'));
+		$inscripcions = $this->Inscripcion->find('list');
+        
+		$this->set(compact('centros', 'titulacions', 'materias', 'ciclos', 'inscripcions', $inscripcions));
 	}
 
 	function edit($id = null) {
@@ -124,6 +119,7 @@ class CursosController extends AppController {
 		  }
 		  if ($this->Curso->save($this->data)) {
 				$this->Session->setFlash('La sección ha sido grabada.', 'default', array('class' => 'alert alert-success'));
+				//$this->redirect(array('action' => 'index'));
 				$inserted_id = $this->Curso->id;
 				$this->redirect(array('action' => 'view', $inserted_id));
 			} else {
@@ -133,11 +129,13 @@ class CursosController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Curso->read(null, $id);
 		}
+		
 		$centros = $this->Curso->Centro->find('list');
+		$titulacions = $this->Curso->Titulacion->find('list');
 		$ciclos = $this->Curso->Ciclo->find('list');
-		$userCentroId = $this->getUserCentroId();
-		$centroNivel = $this->Curso->Centro->find('list', array('fields'=>array('id','nivel')));
-		$this->set(compact('centros', 'ciclos', 'centroNivel'));
+		$inscripcions = $this->Inscripcion->find('list');
+
+		$this->set(compact('centros', 'titulacions', 'modalidads', 'ciclos', 'inscripcions', $inscripcions));
 	}
 
 	function delete($id = null) {

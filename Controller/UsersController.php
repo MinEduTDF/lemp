@@ -6,6 +6,7 @@ class UsersController extends AppController {
  
     public $helpers = array('Text', 'Js', 'Time');
     public $components = array('Paginator', 'RequestHandler', 'Session');
+  
     public $paginate = array(
         'limit' => 25,
         'conditions' => array('status' => '1'),
@@ -21,7 +22,7 @@ class UsersController extends AppController {
         //logout y la correspondiente a usuario (página solo para ellos)
 	    if($this->Auth->user('role') === 'superadmin') {
 	        $this->Auth->allow();
-	    } elseif (($this->Auth->user('role') === 'admin') || ($this->Auth->user('role') === 'visoradmin') || ($this->Auth->user('role') === 'usuario')) { 
+	    } elseif ($this->Auth->user('role') === 'admin' || ($this->Auth->user('role') === 'usuario')) { 
 	        $this->Auth->allow('logout', 'usuario');
 	    } 
     }     
@@ -59,7 +60,7 @@ class UsersController extends AppController {
     }
 
     public function index() {
-        $this->User->recursive = 0;
+        //$this->User->recursive = 0;
 		$this->paginate = array(
             'limit' => 6,
             'order' => array('User.username' => 'asc' )
@@ -98,13 +99,10 @@ class UsersController extends AppController {
 		  }
 		  if (!empty($this->data)) {
 			$this->User->create();
-			if ($this->User->save($this->request->data)) {
+			if ($this->User->save($this->data)) {
                 $this->Session->setFlash('El Usuario ha sido grabado', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'index'));
-				/*
-				$inserted_id = $this->Usuario->id;
+				$inserted_id = $this->User->id;
 				$this->redirect(array('action' => 'view', $inserted_id));
-				*/
 			} else {
 				$this->Session->setFlash('El Usuario no fue grabado. Intentelo nuevamente.', 'default', array('class' => 'alert alert-danger'));
 			}
@@ -115,23 +113,20 @@ class UsersController extends AppController {
 	}
 
 	function edit($id = null) {
-		if (!$id && empty($this->request->data)) {
+		if (!$id && empty($this->data)) {
 			$this->Session->setFlash('Usuario no valido', 'default', array('class' => 'alert alert-warning'));
 			$this->redirect(array('action' => 'index'));
 		}
-		if (!empty($this->request->data)) {
+		if (!empty($this->data)) {
 		  //abort if cancel button was pressed  
             if(isset($this->params['data']['cancel'])){
                 $this->Session->setFlash('Los cambios no fueron guardados. Edición cancelada.', 'default', array('class' => 'alert alert-warning'));
                 $this->redirect( array( 'action' => 'index' ));
 		  }
-			if ($this->User->save($this->request->data)) {
+			if ($this->User->save($this->data)) {
 				$this->Session->setFlash('El usuario ha sido grabado', 'default', array('class' => 'alert alert-success'));
-				$this->redirect(array('action' => 'index'));
-				/*
-				$inserted_id = $this->Usuario->id;
+				$inserted_id = $this->User->id;
 				$this->redirect(array('action' => 'view', $inserted_id));
-				*/
 			} else {
 				$this->Session->setFlash('El usuario no ha sido grabado. Intentelo nuevamente.', 'default', array('class' => 'alert alert-danger'));
 			}

@@ -5,7 +5,7 @@ class Alumno extends AppModel {
 	
 	var $name = 'Alumno';
     //var $displayField = 'apellido';
-	public $virtualFields = array('nombre_completo_alumno'=> 'CONCAT(Alumno.apellidos, " ", Alumno.nombres)');
+	//public $virtualFields = array('nombre_completo_alumno'=> 'CONCAT(Alumno.apellidos, " ", Alumno.nombres)');
     /*
 	public $actsAs = array(
 			'Upload.Upload' => array(
@@ -24,6 +24,17 @@ class Alumno extends AppModel {
 			)
 		);
 	*/
+	
+    var $belongsTo = array(
+		'Persona' => array(
+			'className' => 'Persona',
+			'foreignKey' => 'persona_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
+
 	var $hasMany = array(
 		'Familiar' => array(
 			'className' => 'Familiar',
@@ -284,14 +295,7 @@ class Alumno extends AppModel {
                            'message' => 'Indicar un nº de calle.'
                            )
 					),
-					'barrio' => array(
-                           'required' => array(
-						   'rule' => 'notBlank',
-                           'required' => 'create',
-                           'message' => 'Indicar un barrio.'
-                           )
-                   ),	   
-                   'ciudad' => array(
+					'ciudad' => array(
                            'required' => array(
 						   'rule' => 'notBlank',
                            'required' => 'create',

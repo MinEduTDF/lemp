@@ -4,10 +4,9 @@
 /Plugin/DebugKit/*
 /Plugin/Upload/*
 
-/logs/*
 /Vendor/*
+
 /tmp/*
-/var/*
 
 /Console
 

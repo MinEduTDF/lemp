@@ -1,21 +1,20 @@
 <?php
 class Titulacion extends AppModel {
 	var $name = 'Titulacion';
-    var $displayField = 'nombre';
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
+  public $displayField = 'nombre';
+	public $actsAs = array('Containable');
 
-	var $belongsTo = array(
-		'Centro' => array(
-			'className' => 'Centro',
-			'foreignKey' => 'centro_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
-	);
+  //The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $hasMany = array(
-		'Curso' => array(
+		'Disenocurricular' => array(
+      'className' => 'Disenocurricular',
+      'foreignKey' => 'titulacion_id',
+      'conditions' => '',
+      'fields' => '',
+      'order' => ''
+    ),
+    'Curso' => array(
 			'className' => 'Curso',
 			'foreignKey' => 'titulacion_id',
 			'dependent' => false,
@@ -27,9 +26,26 @@ class Titulacion extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
-		)
-	);
+		),
+  );
 
+  var $hasAndBelongsToMany = array(
+    'Centro' => array(
+      'className' => 'Centro',
+      'joinTable' => 'centros_titulacions',
+      'foreignKey' => 'titulacion_id',
+      'associationForeignKey' => 'centro_id',
+      'unique' => true,
+      'conditions' => '',
+      'fields' => '',
+      'order' => '',
+      'limit' => '',
+      'offset' => '',
+      'finderQuery' => '',
+      'deleteQuery' => '',
+      'insertQuery' => ''
+    )
+  );
 
 	//Validaciones
         var $validate = array(
@@ -107,10 +123,10 @@ class Titulacion extends AppModel {
                         )
                 ),
 				   'carga_horaria_en' => array(
-                           'required' => array(
+               'required' => array(
 						   'rule' => 'notBlank',
 						   'required' => 'create',       
-                           'message' => 'Indicar una opción.'
+               'message' => 'Indicar una opción.'
                            )
                 ),
 				   'carga_horaria' => array(

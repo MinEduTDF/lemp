@@ -1,13 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
-/**
- * MesaExamens Controller
- *
- * @property MesaExamen $MesaExamen
- * @property PaginatorComponent $Paginator
- * @property FlashComponent $Flash
- * @property SessionComponent $Session
- */
+
 class MesaExamensController extends AppController {
 
    	var $name = 'Mesaexamens';
@@ -15,6 +8,17 @@ class MesaExamensController extends AppController {
 	public $components = array('Paginator', 'Flash', 'Auth','Session', 'RequestHandler');
 	var $paginate = array('Mesaexamen' => array('limit' => 4, 'order' => 'Mesaexamen.fecha DESC'));
 
+    function beforeFilter(){
+	    parent::beforeFilter();
+		//Si el usuario tiene un rol de superadmin le damos acceso a todo.
+        //Si no es así (se trata de un usuario "admin o usuario") tendrá acceso sólo a las acciones que les correspondan.
+        if(($this->Auth->user('role') === 'superadmin')  || ($this->Auth->user('role') === 'admin')) {
+	        $this->Auth->allow();
+	    } elseif ($this->Auth->user('role') === 'usuario') { 
+	        $this->Auth->allow('index', 'view');
+	    }
+    }
+  
 /**
  * index method
  *

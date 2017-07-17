@@ -1,14 +1,15 @@
 <?php
 class Inscripcion extends AppModel {
 	var $name = 'Inscripcion';
-	var $displayField = 'legajo_nro';
+	public $displayField = 'legajo_nro';
+	public $actsAs = array('Containable');
 	
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'Alumno' => array(
-			'className' => 'Alumno',
-			'foreignKey' => 'alumno_id',
+		'Persona' => array(
+			'className' => 'Persona',
+			'foreignKey' => 'persona_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -78,27 +79,6 @@ class Inscripcion extends AppModel {
 						   'message' => 'Indicar una fecha y hora.'
                            )
                    ),
-				   'empleado_id' => array(
-                           'required' => array(
-						   'rule' => 'notBlank',
-                           'required' => 'create',
-						   'message' => 'Indicar un agente.'
-                           )
-                   ),
-				   'ciclo_id' => array(
-                           'required' => array(
-						   'rule' => 'notBlank',
-                           'required' => 'create',
-						   'message' => 'Indicar un ciclo.'
-                           )
-                   ),
-				   'centro_id' => array(
-                           'required' => array(
-						   'rule' => 'notBlank',
-                           'required' => 'create',
-						   'message' => 'Indicar un centro.'
-                           )
-                   ),
 				   'alumno_id' => array(
                            'required' => array(
 						   'rule' => 'notBlank',
@@ -117,7 +97,7 @@ class Inscripcion extends AppModel {
 	                       'message' => 'Este nº de legajo de alumno esta siendo usado.'
 	                     )
                    ),
-				   /*
+				   
 				   'tipo_alta' => array(
                            'required' => array(
 						   'rule' => 'notBlank',
@@ -125,7 +105,6 @@ class Inscripcion extends AppModel {
 						   'message' => 'Indicar un tipo de alta.'
                            )
                    ),
-                   */
                    'fecha_alta' => array(
                            'required' => array(
 						   'rule' => 'notBlank',
@@ -137,7 +116,6 @@ class Inscripcion extends AppModel {
                            'message' => 'Indicar fecha valida.'
                            )
                    ),
-				   /*
 				   'cursa' => array(
                            'required' => array(
 						   'rule' => 'notBlank',
@@ -228,8 +206,7 @@ class Inscripcion extends AppModel {
                            'message' => 'Indicar una fecha válida.'
                            )
                    ),
-                   */
-				   'fotocopia_dni' => array(
+                   'fotocopia_dni' => array(
                            'boolean' => array(
                            'rule' => array('boolean'),
 					       'message' => 'Indicar una opción'

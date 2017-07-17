@@ -65,29 +65,30 @@
  * A key/value array of driver specific connection options.
  */
 class DATABASE_CONFIG {
-        public $default = array(
-            'datasource' => 'Database/Mysql',
-            'persistent' => false,
-            'host'       => 'traesdockerlemp_db_1',
-            //'port'       => '192.168.99.100:3386',
-            'login'      => 'root',
-            'password'   => 'root',
-            'database'   => 'traes_ip',
-            //'prefix'     => '',
-            'encoding' => 'utf8',
-        );
-        public $test = array(
-            'datasource' => 'Database/Mysql',
-            'persistent' => false,
-            'host'       => '',
-            'port'       => '',
-            'login'      => '',
-            'password'   => '',
-            'database'   => 'test_database',
-            'prefix'     => '',
-            'encoding' => 'utf8',
-        );
-    /*
+	public $default = array(
+		'datasource' => 'Database/Mysql',
+		'persistent' => false,
+		'host' => '192.168.99.100',
+		'port' => 3386,
+		'login' => 'root',
+		'password' => 'root',
+		'database' => 'siep',
+		'prefix' => '',
+		'encoding' => 'utf8',
+	);
+	/*
+	public $test = array(
+		'datasource' => 'Database/Mysql',
+		'persistent' => false,
+		'host' => 'localhost',
+		'port' => 3386,
+		'login' => 'root',
+		'password' => 'root',
+		'database' => 'siep',
+		'prefix' => '',
+		//'encoding' => 'utf8',
+	);
+	
 	public function __construct() {
         $this->default['host']       = getenv("HOST");
         $this->default['login']      = getenv("LOGIN");

@@ -6,6 +6,17 @@ class IntegracionsController extends AppController {
 	public $components = array('Auth','Session');
 	var $paginate = array('Integracions' => array('limit' => 4, 'order' => 'Integracions.id'));
 
+	function beforeFilter(){
+	    parent::beforeFilter();
+		//Si el usuario tiene un rol de superadmin le damos acceso a todo.
+        //Si no es así (se trata de un usuario "admin o usuario") tendrá acceso sólo a las acciones que les correspondan.
+        if(($this->Auth->user('role') === 'superadmin')  || ($this->Auth->user('role') === 'admin')) {
+	        $this->Auth->allow();
+	    } elseif ($this->Auth->user('role') === 'usuario') { 
+	        $this->Auth->allow('index', 'view');
+	    }
+    }
+
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash('Integracion no valido', 'default', array('class' => 'alert alert-warning'));
@@ -31,10 +42,10 @@ class IntegracionsController extends AppController {
 				$this->Session->setFlash('La Integracion no fue grabada. Intente nuevamente.', 'default', array('class' => 'alert alert-danger'));
 			}
 		}
-		$alumnos = $this->Integracion->Alumno->find('list', array('fields'=>array('id',                                                    'nombre_completo_alumno')));
+		$personas = $this->Integracion->Persona->find('list', array('fields'=>array('id', 'nombre_completo_persona')));
 		$centros = $this->Integracion->Centro->find('list', array('fields' => array('id', 'sigla')));
 		$ciclos = $this->Integracion->Ciclo->find('list');
-		$this->set(compact('alumnos', 'centros', 'ciclos'));
+		$this->set(compact('personas', 'centros', 'ciclos'));
 	}
 
 	function edit($id = null) {
@@ -60,10 +71,10 @@ class IntegracionsController extends AppController {
 		if (empty($this->data)) {
 			$this->data = $this->Integracion->read(null, $id);
 		}
-		$alumnos = $this->Integracion->Alumno->find('list', array('fields'=>array('id',                                                    'nombre_completo_alumno')));
+		$personas = $this->Integracion->Persona->find('list', array('fields'=>array('id', 'nombre_completo_persona')));
 		$centros = $this->Integracion->Centro->find('list', array('fields' => array('id', 'sigla')));
 		$ciclos = $this->Integracion->Ciclo->find('list');
-		$this->set(compact('alumnos', 'centros', 'ciclos'));
+		$this->set(compact('personas', 'centros', 'ciclos'));
 
 	}
 

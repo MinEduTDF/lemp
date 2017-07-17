@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 class CiclosController extends AppController {
 
 	var $name = 'Ciclos';
-    public $helpers = array('Form', 'Time', 'Js');
+    var $helpers = array('Form', 'Time', 'Js');
 	public $components = array('Session', 'RequestHandler');
 	var $paginate = array('Ciclo' => array('limit' => 4, 'order' => 'Ciclo.nombre ASC'));
 
@@ -12,15 +12,15 @@ class CiclosController extends AppController {
         parent::beforeFilter();
         //Si el usuario tiene un rol de superadmin le damos acceso a todo.
         //Si no es así (se trata de un usuario "admin o usuario") tendrá acceso sólo a las acciones que les correspondan.
-        if(($this->Auth->user('role') === 'superadmin')  || ($this->Auth->user('role') === 'admin')) {
+        if($this->Auth->user('role') === 'superadmin') {
 	        $this->Auth->allow();
-	    } elseif ($this->Auth->user('role') === 'usuario') { 
+	    } elseif (($this->Auth->user('role') === 'admin') || ($this->Auth->user('role') === 'usuario')) { 
 	        $this->Auth->allow('index', 'view');
 	    } 
     }
 
 	function index() {
-		$this->Ciclo->recursive = -1;
+		$this->Ciclo->recursive = 0;
 		$this->set('ciclos', $this->paginate());
 		$this->redirectToNamed();
 		$conditions = array();

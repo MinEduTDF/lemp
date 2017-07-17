@@ -4,7 +4,7 @@
 <div class="row">
 	<div class="col-xs-12 col-md-6 col-centered">
 		<div id="login" class="animated bounceInDown">
-			<div class="titulo">SIEP | Niveles Inicial/Primario</div><br>
+			<div class="titulo">SIEP | TDF</div><br>
 			<div class="animated fadeIn">
 				<span  class="img_login glyphicon glyphicon-user"></span>
 			</div>
@@ -18,7 +18,7 @@
 	                <?php echo $this->Form->input('password', 
 	       			    array('label'=>'Contraseña', 'between' => '<br>', 'placeholder' => 'Contraseña','class' => 'form-control')); ?>
 			    </div><br>
-			    <?php echo $this->Form->end(array('label' => 'INICIAR SESIÓN', 'style'=>'width:70%;', 'class' => 'btn btn-success btn-lg'));?>
+			    <?php echo $this->Form->end(array('label' => 'INICIAR SESIÓN', 'class' => 'btn btn-success'));?>
 		</div>    
 	</div>
 </div>
